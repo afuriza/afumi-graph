@@ -1,0 +1,163 @@
+object frmGraph: TfrmGraph
+  Left = 442
+  Height = 438
+  Top = 250
+  Width = 718
+  Caption = 'frmGraph'
+  ClientHeight = 438
+  ClientWidth = 718
+  DesignTimePPI = 120
+  object GraphChart: TChart
+    Left = 0
+    Height = 438
+    Top = 0
+    Width = 718
+    AntialiasingMode = amOn
+    AxisList = <    
+      item
+        Grid.Color = clSilver
+        Marks.LabelFont.Height = -12
+        Marks.Format = '%0:.9g dB'
+        Marks.LabelBrush.Style = bsClear
+        Marks.Style = smsCustom
+        Minors = <>
+        Title.LabelFont.Orientation = 900
+        Title.LabelBrush.Style = bsClear
+      end    
+      item
+        Grid.Color = clSilver
+        Grid.Style = psSolid
+        TickLength = 10
+        Alignment = calBottom
+        Marks.Format = '%4:.9g Hz'
+        Marks.LabelBrush.Style = bsClear
+        Marks.Source = ListChartSource1
+        Marks.Style = smsCustom
+        Minors = <        
+          item
+            Grid.Color = clSilver
+            Intervals.Count = 9
+            Intervals.MinLength = 5
+            Intervals.Options = [aipUseCount, aipUseMinLength]
+            Marks.LabelFont.Height = -10
+            Marks.Format = '%0:0.9g Hz'
+            Marks.LabelBrush.Style = bsClear
+            Marks.OverlapPolicy = opHideNeighbour
+            Marks.Style = smsCustom
+          end>
+        Title.LabelBrush.Style = bsClear
+        Transformations = ChartAxisTransformations1
+        OnGetMarkText = GraphChartAxisList1GetMarkText
+        OnMarkToText = GraphChartAxisList1MarkToText
+      end>
+    Foot.OnGetShape = GraphChartChartTitleGetShape
+    Frame.Visible = False
+    GUIConnector = ChartGUIConnectorBGRA1
+    Legend.Alignment = laBottomLeft
+    Legend.BackgroundBrush.Color = clNone
+    Legend.ColumnCount = 2
+    Legend.Font.Height = -15
+    Legend.Frame.Visible = False
+    Legend.MarginX = 10
+    Legend.MarginY = 10
+    Legend.Spacing = 6
+    Legend.SymbolFrame.Visible = False
+    Legend.SymbolWidth = 10
+    Legend.UseSidebar = False
+    Legend.Visible = True
+    Margins.Top = 40
+    Margins.Right = 10
+    MarginsExternal.Left = 10
+    MarginsExternal.Top = 10
+    MarginsExternal.Right = 10
+    MarginsExternal.Bottom = 10
+    Title.Text.Strings = (
+      'TAChart'
+    )
+    OnAfterCustomDrawBackWall = GraphChartAfterCustomDrawBackWall
+    OnAfterDraw = GraphChartAfterDraw
+    OnBeforeCustomDrawBackground = GraphChartBeforeCustomDrawBackground
+    Align = alClient
+    OnClick = GraphChartClick
+  end
+  object dummyChart: TChart
+    Left = 488
+    Height = 152
+    Top = 32
+    Width = 198
+    AxisList = <    
+      item
+        Grid.Color = clSilver
+        Grid.Style = psSolid
+        Marks.Format = '%0:.9g dB'
+        Marks.LabelBrush.Style = bsClear
+        Marks.Style = smsCustom
+        Minors = <>
+        Title.LabelFont.Orientation = 900
+        Title.LabelBrush.Style = bsClear
+      end    
+      item
+        Grid.Color = clSilver
+        Grid.Style = psSolid
+        TickLength = 10
+        Alignment = calBottom
+        Marks.Format = '%4:.9g Hz'
+        Marks.LabelBrush.Style = bsClear
+        Marks.Source = ListChartSource1
+        Marks.Style = smsCustom
+        Minors = <        
+          item
+            Grid.Color = clSilver
+            Intervals.Count = 9
+            Intervals.MinLength = 5
+            Intervals.Options = [aipUseCount, aipUseMinLength]
+            Marks.LabelFont.Height = -10
+            Marks.Format = '%0:.9g Hz'
+            Marks.LabelBrush.Style = bsClear
+            Marks.OverlapPolicy = opHideNeighbour
+            Marks.Style = smsCustom
+          end>
+        Title.LabelBrush.Style = bsClear
+        Transformations = ChartAxisTransformations1
+      end>
+    Margins.Right = 10
+    MarginsExternal.Left = 10
+    MarginsExternal.Top = 10
+    MarginsExternal.Right = 10
+    MarginsExternal.Bottom = 10
+    Title.Text.Strings = (
+      'TAChart'
+    )
+    Visible = False
+    object dummySeries: TLineSeries
+      OnGetMark = dummySeriesGetMark
+      AxisIndexX = 1
+      LinePen.Width = 2
+      OnCustomDrawPointer = dummySeriesCustomDrawPointer
+    end
+  end
+  object ChartAxisTransformations1: TChartAxisTransformations
+    Left = 295
+    Top = 240
+    object ChartAxisTransformations1LogarithmAxisTransform1: TLogarithmAxisTransform
+      Base = 10
+    end
+  end
+  object ListChartSource1: TListChartSource
+    DataPoints.Strings = (
+      '1||?|'
+      '10||?|'
+      '100||?|'
+      '1000||?|'
+      '10000||?|'
+      '100000||?|'
+    )
+    OnCompare = ListChartSource1Compare
+    Left = 280
+    Top = 68
+  end
+  object ChartGUIConnectorBGRA1: TChartGUIConnectorBGRA
+    Left = 172
+    Top = 278
+  end
+end
