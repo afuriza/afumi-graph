@@ -11,7 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, tachartlazaruspkg, tachartbgra, ControlMain,
-  ControlGraph, ControlFindSquig
+  ControlGraph, ControlFindSquig, GraphCollection, ControlTargetGenerator
   { you can add units after this };
 
 {$R *.res}
@@ -23,6 +23,7 @@ begin
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmGraph, frmGraph);
   Application.CreateForm(TfrmFindSquig, frmFindSquig);
+  Application.CreateForm(TfrmTargetGenerator, frmTargetGenerator);
   Application.Run;
 end.
 

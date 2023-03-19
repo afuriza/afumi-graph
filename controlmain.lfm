@@ -7,9 +7,10 @@ object frmMain: TfrmMain
   ClientHeight = 531
   ClientWidth = 1044
   DesignTimePPI = 120
+  Menu = AppMenu
   OnShow = FormShow
   Position = poScreenCenter
-  object ListView1: TListView
+  object lvProducts: TListView
     AnchorSideRight.Control = Splitter1
     Left = 8
     Height = 427
@@ -30,7 +31,7 @@ object frmMain: TfrmMain
     RowSelect = True
     TabOrder = 0
     ViewStyle = vsReport
-    OnClick = ListView1Click
+    OnClick = lvProductsClick
   end
   object Image1: TImage
     Left = 8
@@ -443,5 +444,16 @@ object frmMain: TfrmMain
     )
     Left = 583
     Top = 277
+  end
+  object AppMenu: TMainMenu
+    Left = 789
+    Top = 29
+    object miTools: TMenuItem
+      Caption = 'Tools'
+      object miTargetGenerator: TMenuItem
+        Caption = 'Target Generator'
+        OnClick = miTargetGeneratorClick
+      end
+    end
   end
 end

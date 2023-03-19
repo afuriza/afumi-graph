@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, StdCtrls,
-  ExtCtrls, ColorBox, Menus, ControlGraph, TASeries, ControlFindSquig;
+  ExtCtrls, Menus, ControlGraph, TASeries, ControlFindSquig, ControlTargetGenerator;
 
 type
 
@@ -25,9 +25,12 @@ type
     Label6: TLabel;
     lbName: TLabel;
     lbAuthor: TLabel;
-    ListView1: TListView;
+    lvProducts: TListView;
+    AppMenu: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
+    miTools: TMenuItem;
+    miTargetGenerator: TMenuItem;
     miDelete: TMenuItem;
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
@@ -41,12 +44,11 @@ type
     procedure ColorDialog1Close(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Image1Click(Sender: TObject);
-    procedure ListView1Click(Sender: TObject);
+    procedure lvProductsClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure miDeleteClick(Sender: TObject);
-    procedure Splitter1CanOffset(Sender: TObject; var NewOffset: Integer;
-      var Accept: Boolean);
+    procedure miTargetGeneratorClick(Sender: TObject);
   private
 
   public
@@ -79,9 +81,9 @@ end;
 
 procedure TfrmMain.ColorDialog1Close(Sender: TObject);
 begin
-  if ListView1.Selected <> nil then
+  if lvProducts.Selected <> nil then
   begin
-    TLineSeries(frmGraph.GraphChart.Series[ListView1.Selected.Index])
+    TLineSeries(frmGraph.GraphChart.Series[lvProducts.Selected.Index])
       .SeriesColor := ColorDialog1.Color;
     frmGraph.GraphChart.Refresh;
   end;
@@ -100,14 +102,14 @@ begin
 
 end;
 
-procedure TfrmMain.ListView1Click(Sender: TObject);
+procedure TfrmMain.lvProductsClick(Sender: TObject);
 begin
-  if ListView1.Selected <> nil then
+  if lvProducts.Selected <> nil then
   begin
-    ColorButton1.ButtonColor := TLineSeries(frmGraph.GraphChart.Series[ListView1.Selected.Index])
+    ColorButton1.ButtonColor := TLineSeries(frmGraph.GraphChart.Series[lvProducts.Selected.Index])
       .SeriesColor;
-    lbName.Caption := ListView1.Selected.Caption;
-    lbAuthor.Caption := ListView1.Selected.SubItems[0];
+    lbName.Caption := lvProducts.Selected.Caption;
+    lbAuthor.Caption := lvProducts.Selected.SubItems[0];
   end;
 end;
 
@@ -135,7 +137,7 @@ begin
   NewSeries.Assign(frmGraph.dummySeries);
   NewSeries.Title := ATitle + ' (' + AAuthor + ')';
   frmGraph.GraphChart.AddSeries(NewSeries);
-  ListItem := ListView1.Items.Add;
+  ListItem := lvProducts.Items.Add;
   ListItem.Caption := ExtractFileName(ATitle);
   ListItem.SubItems.Add(AAuthor);
 
@@ -157,8 +159,7 @@ begin
 
 
     if (OriginText[i].Contains('Freq(Hz)') and
-      OriginText[i].Contains('SPL(dB)') and
-      OriginText[i].Contains('Phase(degrees)')) then
+      OriginText[i].Contains('SPL(dB)') ) then
       StartParse := True;
 
 
@@ -178,8 +179,7 @@ begin
 
 
     if (OriginText[i].Contains('Freq(Hz)') and
-      OriginText[i].Contains('SPL(dB)') and
-      OriginText[i].Contains('Phase(degrees)')) then
+      OriginText[i].Contains('SPL(dB)')) then
       StartParse := True;
 
 
@@ -208,20 +208,19 @@ end;
 
 procedure TfrmMain.miDeleteClick(Sender: TObject);
 begin
-  //ListView1.Items.Ad;
-  if ListView1.Selected <> nil then
+  //lvProducts.Items.Ad;
+  if lvProducts.Selected <> nil then
   begin
     frmGraph.GraphChart.Series.List.Remove(frmGraph.GraphChart.Series.List[
-      ListView1.Selected.Index]);
-    ListView1.Items.Delete(ListView1.Selected.Index);
+      lvProducts.Selected.Index]);
+    lvProducts.Items.Delete(lvProducts.Selected.Index);
     frmGraph.GraphChart.Refresh;
   end;
 end;
 
-procedure TfrmMain.Splitter1CanOffset(Sender: TObject; var NewOffset: Integer;
-  var Accept: Boolean);
+procedure TfrmMain.miTargetGeneratorClick(Sender: TObject);
 begin
-
+  frmTargetGenerator.Show;
 end;
 
 end.

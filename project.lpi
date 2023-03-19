@@ -64,6 +64,19 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ControlFindSquig"/>
       </Unit>
+      <Unit>
+        <Filename Value="units\graphcollection.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GraphCollection"/>
+      </Unit>
+      <Unit>
+        <Filename Value="controltargetgenerator.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmTargetGenerator"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ControlTargetGenerator"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -74,6 +87,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="units"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>
